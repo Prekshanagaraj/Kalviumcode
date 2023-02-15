@@ -1,0 +1,35 @@
+import java.util.Arrays;
+
+public class CoinChange {
+    
+    public static int[] getChange(int[] coins, int amount) {
+        int[] result = new int[coins.length];
+        int coinIndex = coins.length - 1;
+        while (amount > 0 && coinIndex >= 0) {
+            if (coins[coinIndex] <= amount) {
+                int count = amount / coins[coinIndex];
+                if (count > 0) {
+                    result[coinIndex] = count;
+                    amount = amount % coins[coinIndex];
+                }
+            }
+            coinIndex--;
+        }
+        if (amount > 0) {
+            return null; 
+        } else {
+            return result;
+        }
+    }
+    
+    public static void main(String[] args) {
+        int[] coins = {1, 2, 5, 10, 20, 50};
+        int amount = 43;
+        int[] change = getChange(coins, amount);
+        if (change != null) {
+            System.out.println(Arrays.toString(change));
+        } else {
+            System.out.println("Cannot make change");
+        }
+    }
+}
